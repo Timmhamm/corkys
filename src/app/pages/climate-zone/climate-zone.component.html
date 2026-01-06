@@ -1,0 +1,107 @@
+<div class="climate-zone-page">
+  <section class="climate-zone-hero section">
+    <div class="container">
+      <h1>What Climate Zone am I?</h1>
+      <p class="subtitle">Find your USDA hardiness zone and IECC climate zone</p>
+    </div>
+  </section>
+
+  <section class="climate-zone-content section">
+    <div class="container">
+      <div class="climate-zone-container">
+        <div class="selection-section">
+          <div class="location-option">
+            <button 
+              class="btn-secondary btn-location" 
+              (click)="useLocation()" 
+              [disabled]="isLoading"
+            >
+              {{ isLoading ? 'Loading...' : '📍 Try Location Detection' }}
+            </button>
+            <p class="location-note">
+              <small>Note: Location detection may not work due to browser security restrictions. Manual selection below is recommended.</small>
+            </p>
+            <p class="option-divider">or</p>
+          </div>
+
+          <div class="manual-selection">
+            <div class="form-group">
+              <label for="state">Select State:</label>
+              <select 
+                id="state" 
+                class="form-control"
+                [(ngModel)]="selectedState"
+                (change)="onStateChange()"
+                [disabled]="isLoading"
+              >
+                <option value="">-- Select a State --</option>
+                <option *ngFor="let stateCode of getStateKeys()" [value]="stateCode">
+                  {{ states[stateCode] }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="availableCounties.length > 0">
+              <label for="county">Select County:</label>
+              <select 
+                id="county" 
+                class="form-control"
+                [(ngModel)]="selectedCounty"
+                (change)="onCountyChange()"
+                [disabled]="isLoading"
+              >
+                <option value="">-- Select a County --</option>
+                <option *ngFor="let county of availableCounties" [value]="county">
+                  {{ county }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="error-message" *ngIf="errorMessage">
+            <p>{{ errorMessage }}</p>
+          </div>
+        </div>
+
+        <div class="result-section" *ngIf="result">
+          <div class="result-card">
+            <h2>Your Climate Zone Information</h2>
+            <div class="result-content">
+              <div class="result-item">
+                <span class="result-label">Location:</span>
+                <span class="result-value">{{ result["County Name"] }}, {{ states[result.State] }}</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">IECC Climate Zone:</span>
+                <span class="result-value result-zone">{{ result["IECC Climate Zone"] }}{{ result["IECC Moisture Regime"] !== 'N/A' ? result["IECC Moisture Regime"] : '' }}</span>
+              </div>
+              <div class="result-item" *ngIf="result['BA Climate Zone']">
+                <span class="result-label">BA Climate Zone:</span>
+                <span class="result-value">{{ result["BA Climate Zone"] }}</span>
+              </div>
+              <div class="result-item" *ngIf="result['IECC Moisture Regime'] && result['IECC Moisture Regime'] !== 'N/A'">
+                <span class="result-label">Moisture Regime:</span>
+                <span class="result-value">{{ result["IECC Moisture Regime"] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section" *ngIf="!result && !isLoading">
+          <div class="info-card">
+            <h3>About Climate Zones</h3>
+            <p>
+              Climate zones help gardeners and builders understand the typical weather patterns in their area. 
+              The IECC (International Energy Conservation Code) climate zones are used for building energy codes, 
+              while USDA hardiness zones help determine which plants will thrive in your location.
+            </p>
+            <p>
+              Use the location button to automatically detect your zone, or manually select your state and county 
+              from the dropdown menus above.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,266 @@
+.donations-page {
+  width: 100%;
+}
+
+.donations-hero {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.donations-hero h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.donations-hero .subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.donations-content {
+  background-color: var(--white);
+}
+
+.intro-section {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+}
+
+.intro-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--light-text);
+  margin-bottom: 1.5rem;
+}
+
+.guidelines-section {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+}
+
+.guidelines-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--primary-green);
+}
+
+.guidelines-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.guideline-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background-color: var(--warm-beige);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guideline-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px var(--shadow-hover);
+}
+
+.guideline-icon {
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+  background-color: var(--primary-green);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.guideline-content {
+  flex: 1;
+}
+
+.guideline-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.guideline-content strong {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.guideline-content em {
+  font-style: italic;
+}
+
+.form-section {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+}
+
+.form-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+}
+
+.form-section > p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 15px;
+}
+
+.note {
+  background-color: var(--cream);
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid var(--primary-green);
+  margin: 20px 0;
+}
+
+.note strong {
+  color: var(--primary-green);
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.store-info {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid rgba(45, 80, 22, 0.2);
+  text-align: left;
+}
+
+.store-info p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 10px;
+}
+
+.store-info a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.store-info a:hover {
+  text-decoration: underline;
+}
+
+.closing-message {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  background-color: var(--warm-beige);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.closing-message p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: var(--primary-green);
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .donations-hero {
+    padding: 60px 0 40px;
+  }
+
+  .donations-hero h1 {
+    font-size: 2rem;
+  }
+
+  .donations-hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .intro-section h2,
+  .guidelines-section h2 {
+    font-size: 2rem;
+  }
+
+  .intro-section p {
+    font-size: 1rem;
+  }
+
+  .guideline-item {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .guideline-icon {
+    align-self: flex-start;
+  }
+
+  .guideline-content p {
+    font-size: 1rem;
+  }
+
+  .form-section {
+    padding: 30px 20px;
+  }
+
+  .form-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-section > p {
+    font-size: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn-primary,
+  .form-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .store-info {
+    text-align: center;
+  }
+
+  .closing-message {
+    padding: 20px;
+  }
+
+  .closing-message p {
+    font-size: 1.1rem;
+  }
+}
+

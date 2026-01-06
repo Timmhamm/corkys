@@ -1,0 +1,242 @@
+.careers-page {
+  width: 100%;
+}
+
+.careers-hero {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.careers-hero h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.careers-hero .subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.careers-content {
+  background-color: var(--white);
+}
+
+.intro-section {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.intro-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: var(--light-text);
+}
+
+.careers-list {
+  max-width: 900px;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.career-card {
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.career-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--shadow-hover);
+}
+
+.career-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--primary-green);
+}
+
+.career-header h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--primary-green);
+  flex: 1;
+  min-width: 250px;
+}
+
+.career-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  background-color: var(--primary-green);
+  color: var(--white);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.career-body h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--primary-green);
+}
+
+.career-body p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 15px;
+}
+
+.career-body p:last-of-type {
+  margin-bottom: 25px;
+}
+
+.career-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.how-to-apply {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.how-to-apply h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+}
+
+.how-to-apply p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 15px;
+}
+
+.how-to-apply a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.how-to-apply a:hover {
+  text-decoration: underline;
+}
+
+.how-to-apply ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.how-to-apply li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+}
+
+.how-to-apply li::before {
+  content: "•";
+  color: var(--primary-green);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .careers-hero {
+    padding: 60px 0 40px;
+  }
+
+  .careers-hero h1 {
+    font-size: 2rem;
+  }
+
+  .careers-hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .intro-section h2 {
+    font-size: 2rem;
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+  }
+
+  .career-card {
+    padding: 30px 20px;
+  }
+
+  .career-header {
+    flex-direction: column;
+  }
+
+  .career-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .career-body h3 {
+    font-size: 1.3rem;
+  }
+
+  .career-body p {
+    font-size: 1rem;
+  }
+
+  .career-actions {
+    flex-direction: column;
+  }
+
+  .career-actions .btn-primary,
+  .career-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .how-to-apply {
+    padding: 30px 20px;
+  }
+
+  .how-to-apply h2 {
+    font-size: 1.5rem;
+  }
+
+  .how-to-apply p,
+  .how-to-apply li {
+    font-size: 1rem;
+  }
+}
+

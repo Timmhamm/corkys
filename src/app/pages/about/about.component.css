@@ -1,0 +1,117 @@
+.about-page {
+  width: 100%;
+}
+
+.about-hero {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.about-hero h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.about-hero .subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.about-content {
+  background-color: var(--white);
+}
+
+.about-text {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-text h2 {
+  font-size: 2.2rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
+}
+
+.about-text > h2:first-of-type {
+  margin-top: 0;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--light-text);
+  margin-bottom: 1.5rem;
+}
+
+.about-text a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.about-text a:hover {
+  text-decoration: underline;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background-color: var(--warm-beige);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px var(--shadow-hover);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: var(--primary-green);
+}
+
+.feature-card p {
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 60px 0 40px;
+  }
+
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

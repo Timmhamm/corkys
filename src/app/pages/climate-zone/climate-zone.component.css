@@ -1,0 +1,265 @@
+.climate-zone-page {
+  width: 100%;
+}
+
+.climate-zone-hero {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.climate-zone-hero h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.climate-zone-hero .subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.climate-zone-content {
+  background-color: var(--white);
+}
+
+.climate-zone-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.selection-section {
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  margin-bottom: 30px;
+}
+
+.location-option {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.btn-location {
+  font-size: 1rem;
+  padding: 12px 30px;
+  margin-bottom: 10px;
+}
+
+.btn-location:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.location-note {
+  margin: 10px 0;
+  color: var(--light-text);
+}
+
+.location-note small {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.option-divider {
+  color: var(--light-text);
+  font-style: italic;
+  margin: 20px 0;
+  position: relative;
+}
+
+.option-divider::before,
+.option-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: var(--light-text);
+  opacity: 0.3;
+}
+
+.option-divider::before {
+  left: 0;
+}
+
+.option-divider::after {
+  right: 0;
+}
+
+.manual-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--dark-text);
+  font-size: 1rem;
+}
+
+.form-control {
+  padding: 12px 15px;
+  border: 2px solid var(--warm-beige);
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: var(--white);
+  color: var(--dark-text);
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-green);
+}
+
+.form-control:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fee;
+  border-left: 4px solid #c33;
+  border-radius: 5px;
+}
+
+.error-message p {
+  color: #c33;
+  margin: 0;
+  font-weight: 500;
+}
+
+.result-section {
+  margin-bottom: 30px;
+}
+
+.result-card {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--shadow-hover);
+}
+
+.result-card h2 {
+  color: var(--white);
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.result-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.result-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.result-value {
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+.result-zone {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.info-section {
+  margin-top: 30px;
+}
+
+.info-card {
+  background-color: var(--warm-beige);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.info-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+}
+
+.info-card p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 15px;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .climate-zone-hero {
+    padding: 60px 0 40px;
+  }
+
+  .climate-zone-hero h1 {
+    font-size: 2rem;
+  }
+
+  .climate-zone-hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .selection-section {
+    padding: 30px 20px;
+  }
+
+  .result-card {
+    padding: 30px 20px;
+  }
+
+  .result-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .result-value {
+    text-align: left;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+}
+

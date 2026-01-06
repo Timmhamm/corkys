@@ -1,0 +1,507 @@
+<div class="mulch-calculator-page">
+  <section class="calculator-hero section">
+    <div class="container">
+      <h1>Mulch Calculator</h1>
+      <p class="subtitle">Calculate how much mulch you need for your landscaping project</p>
+    </div>
+  </section>
+
+  <section class="calculator-content section">
+    <div class="container">
+      <div class="calculator-container">
+        <div class="calculator-form">
+          <div class="form-section">
+            <h2>Select Shape</h2>
+            <div class="form-group">
+              <label for="shape">Mulch Area:</label>
+              <select 
+                id="shape" 
+                class="form-control"
+                [(ngModel)]="selectedShape"
+                (change)="onShapeChange()"
+              >
+                <option value="rectangle">Rectangle</option>
+                <option value="square">Square</option>
+                <option value="circle">Circle</option>
+                <option value="rectangle-border">Rectangle Border</option>
+                <option value="circle-border">Circle Border</option>
+                <option value="annulus">Annulus</option>
+                <option value="triangle">Triangle</option>
+                <option value="trapezoid">Trapezoid</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h2>Measurements</h2>
+            
+            <!-- Rectangle/Square inputs -->
+            <div *ngIf="selectedShape === 'rectangle' || selectedShape === 'square'">
+              <div class="form-group" *ngIf="selectedShape === 'rectangle'">
+                <label for="length">Length:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="length"
+                    class="form-control"
+                    [(ngModel)]="length"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="width">{{ selectedShape === 'square' ? 'Side Length' : 'Width' }}:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="width"
+                    class="form-control"
+                    [(ngModel)]="width"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Circle inputs -->
+            <div *ngIf="selectedShape === 'circle'">
+              <div class="form-group">
+                <label for="diameter">Diameter:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="diameter"
+                    class="form-control"
+                    [(ngModel)]="diameter"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rectangle Border inputs -->
+            <div *ngIf="selectedShape === 'rectangle-border'">
+              <div class="form-group">
+                <label for="innerLength">Inner Length:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="innerLength"
+                    class="form-control"
+                    [(ngModel)]="innerLength"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="innerWidth">Inner Width:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="innerWidth"
+                    class="form-control"
+                    [(ngModel)]="innerWidth"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="borderWidth">Border Width:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="borderWidth"
+                    class="form-control"
+                    [(ngModel)]="borderWidth"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Circle Border / Annulus inputs -->
+            <div *ngIf="selectedShape === 'circle-border' || selectedShape === 'annulus'">
+              <div class="form-group">
+                <label for="innerDiameter">Inner Diameter:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="innerDiameter"
+                    class="form-control"
+                    [(ngModel)]="innerDiameter"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="borderWidth">Border Width:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="borderWidth"
+                    class="form-control"
+                    [(ngModel)]="borderWidth"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Triangle inputs -->
+            <div *ngIf="selectedShape === 'triangle'">
+              <div class="form-group">
+                <label for="base">Base:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="base"
+                    class="form-control"
+                    [(ngModel)]="base"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="height">Height:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="height"
+                    class="form-control"
+                    [(ngModel)]="height"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trapezoid inputs -->
+            <div *ngIf="selectedShape === 'trapezoid'">
+              <div class="form-group">
+                <label for="sideA">Side A (top):</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="sideA"
+                    class="form-control"
+                    [(ngModel)]="sideA"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sideB">Side B (bottom):</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="sideB"
+                    class="form-control"
+                    [(ngModel)]="sideB"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="trapezoidHeight">Height:</label>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    id="trapezoidHeight"
+                    class="form-control"
+                    [(ngModel)]="trapezoidHeight"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                  >
+                  <select class="unit-select" [(ngModel)]="units">
+                    <option value="in">in</option>
+                    <option value="ft">ft</option>
+                    <option value="yd">yd</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Depth input (always shown) -->
+            <div class="form-group">
+              <label for="depth">Depth:</label>
+              <div class="input-with-unit">
+                <input 
+                  type="number" 
+                  id="depth"
+                  class="form-control"
+                  [(ngModel)]="depth"
+                  (input)="calculate()"
+                  step="0.1"
+                  min="0"
+                  value="3"
+                >
+                <select class="unit-select" [(ngModel)]="depthUnit">
+                  <option value="in">in</option>
+                  <option value="ft">ft</option>
+                  <option value="cm">cm</option>
+                  <option value="m">m</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section optional-section">
+            <h2>Material & Pricing (Optional)</h2>
+            
+            <div class="form-group">
+              <label for="material">Select Material:</label>
+              <select 
+                id="material" 
+                class="form-control"
+                [(ngModel)]="selectedMaterial"
+                (change)="onMaterialChange()"
+              >
+                <option value="">-- Select a Material --</option>
+                <optgroup *ngFor="let category of getMaterialCategories()" [label]="category">
+                  <option *ngFor="let material of getMaterialsByCategory(category)" [value]="material.name">
+                    {{ material.name }} - ${{ material.pricePerCubicYard.toFixed(2) }}/yd³
+                  </option>
+                </optgroup>
+              </select>
+              <small class="form-help-text">Select a material to auto-fill pricing, or enter custom pricing below</small>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input 
+                  type="radio" 
+                  name="pricingMode"
+                  [(ngModel)]="pricingMode"
+                  value="bulk"
+                  (change)="calculate()"
+                >
+                Bulk Pricing
+              </label>
+              <div *ngIf="pricingMode === 'bulk'" class="pricing-inputs">
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    class="form-control"
+                    [(ngModel)]="pricePerUnit"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                    placeholder="Price"
+                  >
+                  <span class="unit-text">$</span>
+                </div>
+                <select class="form-control" [(ngModel)]="priceUnit" (change)="calculate()">
+                  <option value="cubic-yard">per cubic yard</option>
+                  <option value="cubic-foot">per cubic foot</option>
+                  <option value="cubic-meter">per cubic meter</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input 
+                  type="radio" 
+                  name="pricingMode"
+                  [(ngModel)]="pricingMode"
+                  value="bags"
+                  (change)="calculate()"
+                >
+                Bag Pricing
+              </label>
+              <div *ngIf="pricingMode === 'bags'" class="pricing-inputs">
+                <div class="input-group">
+                  <label>Bag Size:</label>
+                  <select class="form-control" [(ngModel)]="bagSize" (change)="calculate()">
+                    <option value="0.8">0.8 cu ft</option>
+                    <option value="1.0">1.0 cu ft</option>
+                    <option value="1.5">1.5 cu ft</option>
+                    <option value="1.8">1.8 cu ft</option>
+                    <option value="2.0" selected>2.0 cu ft</option>
+                    <option value="3.0">3.0 cu ft</option>
+                  </select>
+                </div>
+                <div class="input-with-unit">
+                  <input 
+                    type="number" 
+                    class="form-control"
+                    [(ngModel)]="pricePerBag"
+                    (input)="calculate()"
+                    step="0.01"
+                    min="0"
+                    placeholder="Price per bag"
+                  >
+                  <span class="unit-text">$</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary btn-calculate" (click)="calculate()">Calculate</button>
+        </div>
+
+        <div class="results-section" *ngIf="cubicYards > 0 || cubicFeet > 0">
+          <div class="results-card">
+            <h2>Answer:</h2>
+            
+            <div class="minimum-notice" *ngIf="minimumPurchase && pricingMode === 'bulk'">
+              <p><strong>Minimum Purchase:</strong> Bulk materials require a minimum purchase of 0.5 cubic yards.</p>
+            </div>
+            
+            <div class="result-item">
+              <span class="result-label">Volume Needed:</span>
+              <span class="result-value">{{ cubicYards.toFixed(3) }} yd³</span>
+            </div>
+            
+            <div class="result-item" *ngIf="minimumPurchase && pricingMode === 'bulk'">
+              <span class="result-label">Purchase Amount:</span>
+              <span class="result-value highlight">{{ purchaseAmount.toFixed(3) }} yd³</span>
+            </div>
+            
+            <div class="result-item">
+              <span class="result-label">Cubic feet =</span>
+              <span class="result-value">{{ cubicFeet.toFixed(3) }}</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Cubic meters =</span>
+              <span class="result-value">{{ cubicMeters.toFixed(3) }}</span>
+            </div>
+            <div class="result-item" *ngIf="pricingMode === 'bags' && numberOfBags > 0">
+              <span class="result-label">Number of bags =</span>
+              <span class="result-value">{{ numberOfBags }}</span>
+            </div>
+            <div class="result-item" *ngIf="cost > 0">
+              <span class="result-label">Cost =</span>
+              <span class="result-value cost-value">${{ cost.toFixed(2) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <div class="info-card">
+          <h3>About Mulch Calculator</h3>
+          <p>
+            Use this calculator to determine how much mulch you need for your landscaping project. 
+            Enter your measurements in any unit (inches, feet, yards, centimeters, or meters), 
+            and the calculator will provide the volume in cubic yards, cubic feet, and cubic meters.
+          </p>
+          <p>
+            <strong>Recommended Depth:</strong> 2-3 inches for most garden beds, 3-4 inches for pathways and slopes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

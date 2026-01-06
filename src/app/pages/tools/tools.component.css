@@ -1,0 +1,154 @@
+.tools-page {
+  width: 100%;
+}
+
+.tools-hero {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.tools-hero h1 {
+  color: var(--white);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.tools-hero .subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.tools-content {
+  background-color: var(--white);
+}
+
+.tools-intro {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.tools-intro p {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: var(--light-text);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-bottom: 4rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tool-card {
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px var(--shadow-hover);
+}
+
+.tool-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.tool-card h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+}
+
+.tool-card p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 25px;
+}
+
+.tool-card .btn-primary {
+  display: inline-block;
+}
+
+.tools-cta {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--warm-beige);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+}
+
+.tools-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+}
+
+.tools-cta p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--light-text);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .tools-hero {
+    padding: 60px 0 40px;
+  }
+
+  .tools-hero h1 {
+    font-size: 2rem;
+  }
+
+  .tools-hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .tools-intro p {
+    font-size: 1.1rem;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 30px 20px;
+  }
+
+  .tool-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .tool-card p {
+    font-size: 1rem;
+  }
+
+  .tools-cta {
+    padding: 30px 20px;
+  }
+
+  .tools-cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .tools-cta p {
+    font-size: 1rem;
+  }
+}
+
