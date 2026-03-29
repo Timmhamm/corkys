@@ -13,7 +13,7 @@ import { ClimateZoneComponent } from './pages/climate-zone/climate-zone.componen
 import { MulchCalculatorComponent } from './pages/mulch-calculator/mulch-calculator.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ToolsComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'gift-cards', component: ShopComponent }, // Temporary: redirect to shop
   { path: 'tools', component: ToolsComponent },

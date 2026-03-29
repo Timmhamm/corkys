@@ -40,6 +40,21 @@
   box-shadow: 0 2px 8px var(--shadow);
 }
 
+.shape-diagram {
+  margin: -10px 0 24px;
+  text-align: center;
+}
+
+.shape-diagram svg {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+}
+
 .form-section {
   margin-bottom: 30px;
 }
@@ -126,6 +141,51 @@
 
 .input-group label {
   margin-bottom: 0;
+}
+
+.purchase-type-toggle {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--dark-text);
+}
+
+.toggle-option input[type="radio"] {
+  accent-color: var(--primary-green);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.material-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid var(--primary-green);
+  border-radius: 5px;
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+
+.material-price__label {
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+.material-price__value {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary-green);
 }
 
 .optional-section {

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-type ShapeType = 'rectangle' | 'square' | 'circle' | 'rectangle-border' | 'circle-border' | 'annulus' | 'triangle' | 'trapezoid';
+type ShapeType = 'rectangle' | 'square' | 'circle' | 'rectangle-border' | 'circle-border' | 'triangle' | 'trapezoid';
 type Unit = 'in' | 'ft' | 'yd' | 'cm' | 'm';
-type PricingMode = 'bulk' | 'bags';
-
 @Component({
   selector: 'app-mulch-calculator',
   templateUrl: './mulch-calculator.component.html',
@@ -13,7 +11,6 @@ export class MulchCalculatorComponent implements OnInit {
   selectedShape: ShapeType = 'rectangle';
   units: Unit = 'ft';
   depthUnit: Unit = 'in';
-  pricingMode: PricingMode = 'bulk';
   
   // Rectangle/Square inputs
   length: number = 0;
@@ -40,12 +37,12 @@ export class MulchCalculatorComponent implements OnInit {
   // Depth
   depth: number = 3;
   
-  // Pricing
+  // Material
+  purchaseType: 'bulk' | 'bagged' = 'bulk';
   selectedMaterial: string = '';
-  pricePerUnit: number = 0;
-  priceUnit: 'cubic-foot' | 'cubic-yard' | 'cubic-meter' = 'cubic-yard';
-  bagSize: number = 2;
-  pricePerBag: number = 0;
+  selectedBaggedMaterial: string = '';
+  readonly BAG_CUBIC_FEET = 1.5;
+  readonly BAG_PRICE = 6.99;
 
   // Material options with prices per cubic yard (converted from 1/2 cubic yard prices)
   materials: { category: string; name: string; pricePerCubicYard: number }[] = [
@@ -87,16 +84,19 @@ export class MulchCalculatorComponent implements OnInit {
       .map(m => ({ name: m.name, pricePerCubicYard: m.pricePerCubicYard }));
   }
 
+  getSelectedMaterialPrice(): number {
+    const material = this.materials.find(m => m.name === this.selectedMaterial);
+    return material ? material.pricePerCubicYard : 0;
+  }
+
   onMaterialChange(): void {
-    if (this.selectedMaterial) {
-      const material = this.materials.find(m => m.name === this.selectedMaterial);
-      if (material) {
-        this.pricePerUnit = material.pricePerCubicYard;
-        this.priceUnit = 'cubic-yard';
-        this.pricingMode = 'bulk';
-        this.calculate();
-      }
-    }
+    this.calculate();
+  }
+
+  onPurchaseTypeChange(): void {
+    this.selectedMaterial = '';
+    this.selectedBaggedMaterial = '';
+    this.calculate();
   }
   
   // Results
@@ -106,7 +106,7 @@ export class MulchCalculatorComponent implements OnInit {
   cost: number = 0;
   numberOfBags: number = 0;
   minimumPurchase: boolean = false;
-  purchaseAmount: number = 0; // Actual amount to purchase (may be minimum)
+  purchaseAmount: number = 0;
 
   constructor() { }
 
@@ -156,7 +156,6 @@ export class MulchCalculatorComponent implements OnInit {
         break;
         
       case 'circle-border':
-      case 'annulus':
         const outerDia = innerDiameterFt + (2 * borderWidthFt);
         const outerArea = Math.PI * Math.pow(outerDia / 2, 2);
         const innerAreaCircle = Math.PI * Math.pow(innerDiameterFt / 2, 2);
@@ -177,37 +176,17 @@ export class MulchCalculatorComponent implements OnInit {
     this.cubicYards = this.cubicFeet / 27;
     this.cubicMeters = this.cubicFeet * 0.0283168;
 
-    // Check for minimum purchase (0.5 cubic yards for bulk materials)
-    this.minimumPurchase = false;
-    this.purchaseAmount = this.cubicYards;
-    
-    if (this.pricingMode === 'bulk' && this.cubicYards < 0.5 && this.cubicYards > 0) {
-      this.minimumPurchase = true;
-      this.purchaseAmount = 0.5; // Minimum purchase amount
-    }
-
-    // Calculate pricing
-    if (this.pricingMode === 'bulk') {
-      if (this.pricePerUnit > 0) {
-        if (this.priceUnit === 'cubic-yard') {
-          this.cost = this.purchaseAmount * this.pricePerUnit;
-        } else if (this.priceUnit === 'cubic-foot') {
-          const purchaseCubicFeet = this.minimumPurchase ? 13.5 : this.cubicFeet; // 0.5 yd³ = 13.5 ft³
-          this.cost = purchaseCubicFeet * this.pricePerUnit;
-        } else if (this.priceUnit === 'cubic-meter') {
-          const purchaseCubicMeters = this.minimumPurchase ? 0.382278 : this.cubicMeters; // 0.5 yd³ = 0.382278 m³
-          this.cost = purchaseCubicMeters * this.pricePerUnit;
-        }
-      } else {
-        this.cost = 0;
-      }
+    if (this.purchaseType === 'bulk') {
+      this.minimumPurchase = this.cubicYards > 0 && this.cubicYards < 0.5;
+      this.purchaseAmount = this.minimumPurchase ? 0.5 : this.cubicYards;
+      const pricePerYard = this.getSelectedMaterialPrice();
+      this.cost = pricePerYard > 0 ? this.purchaseAmount * pricePerYard : 0;
+      this.numberOfBags = 0;
     } else {
-      // Bag pricing (no minimum)
-      const cubicFeetPerBag = this.bagSize;
-      this.numberOfBags = Math.ceil(this.cubicFeet / cubicFeetPerBag);
-      this.cost = this.numberOfBags * this.pricePerBag;
       this.minimumPurchase = false;
       this.purchaseAmount = this.cubicYards;
+      this.numberOfBags = this.selectedBaggedMaterial ? Math.ceil(this.cubicFeet / this.BAG_CUBIC_FEET) : 0;
+      this.cost = this.numberOfBags * this.BAG_PRICE;
     }
   }
 
@@ -240,7 +219,6 @@ export class MulchCalculatorComponent implements OnInit {
       'circle': 'Circle',
       'rectangle-border': 'Rectangle Border',
       'circle-border': 'Circle Border',
-      'annulus': 'Annulus',
       'triangle': 'Triangle',
       'trapezoid': 'Trapezoid'
     };
